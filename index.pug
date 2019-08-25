@@ -1,0 +1,49 @@
+mixin card (country)
+    .card
+        img(src=country.flag)
+        h3= country.name
+        .spread
+            .left Capital
+            .right
+                each cap in country.capitals
+                    div= cap
+        .spread
+            .left Currency
+            .right
+                span #{country.currency} (#{country.currency_code})
+        .spread
+            .left Population
+            .right
+                span #{country.population}
+        .spread
+            .left Area
+            .right
+                span #{country.area} sq. kms
+        .spread
+            .left Population Density
+            .right
+                span #{country.population_density}
+
+
+doctype html
+html
+    head
+        title Countries in the world
+        meta(name='viewport' content='initial-scale=1.0')
+        style(type='text/css').
+            .container { padding: 40px; margin: 0 auto; }
+            .grid { display: flex; justify-content: center; flex-wrap: wrap; }
+            .card { display: block; padding: 20px; text-align: center; box-shadow: 0 0 10px #0004; border-radius: 8px; width: 400px; margin: 20px; }
+            .spread { display: flex; justify-content: space-between; }
+            .left { color: gray; font-weight: bold; text-align: left; }
+            .right { text-align: right; }
+            img { border: 1px gray solid; }
+            body { font-family: sans-serif; line-height: 1.618; color: #2b2b2b; }
+            h1 { text-align: center; }
+            @media screen and (max-width: 720px) { .container { padding: 0; } .card {margin: 10px; } }
+
+    body.container
+        h1 COUNTRIES
+        .grid
+            each country in countries
+                +card (country)
